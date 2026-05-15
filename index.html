@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sertifikat Keikutsertaan – Bakti Sosial Era Digital</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet"/>
+
+<!-- html2canvas + jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+/* ================================================================
+   ROOT VARIABLES — BRIGHT PREMIUM THEME
+================================================================ */
+:root {
+  --blue-deep:   #1a4fa0;
+  --blue-mid:    #2563eb;
+  --blue-light:  #3b82f6;
+  --cyan:        #06b6d4;
+  --cyan-light:  #67e8f9;
+  --gold:        #d97706;
+  --gold-light:  #fbbf24;
+  --gold-pale:   #fef3c7;
+  --white:       #ffffff;
+  --off-white:   #f8faff;
+  --gray-soft:   #e2e8f4;
+  --text-dark:   #0f172a;
+  --text-mid:    #334155;
+  --text-light:  #64748b;
+  --radius:      24px;
+  --radius-sm:   14px;
+  --shadow-card: 0 20px 60px rgba(37,99,235,0.12), 0 4px 16px rgba(0,0,0,0.06);
+  --shadow-btn:  0 8px 32px rgba(37,99,235,0.3);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+html,body{
+  min-height:100vh;
+  font-family:'Poppins',sans-serif;
+  background:var(--off-white);
+  color:var(--text-dark);
+  overflow-x:hidden;
+}
+
+/* ================================================================
+   BRIGHT ANIMATED BACKGROUND
+================================================================ */
+.bg-layer{
+  position:fixed;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 10% 0%,   rgba(59,130,246,0.17) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 10%,  rgba(6,182,212,0.14)  0%, transparent 55%),
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(251,191,36,0.11)  0%, transparent 60%),
+    linear-gradient(160deg,#e0f2fe 0%,#f0f9ff 30%,#faf5ff 60%,#fff7ed 100%);
+}
+.bg-layer::after{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(37,99,235,0.055) 1px,transparent 1px);
+  background-size:30px 30px;
+}
+
+.orb{
+  position:fixed;border-radius:50%;
+  filter:blur(72px);z-index:0;
+  animation:orbFloat 14s ease-in-out infinite;
+  pointer-events:none;
+}
+.orb-1{width:520px;height:520px;background:rgba(59,130,246,0.11); top:-140px;left:-130px;animation-delay:0s;}
+.orb-2{width:420px;height:420px;background:rgba(6,182,212,0.09);  bottom:-90px;right:-110px;animation-delay:-5s;}
+.orb-3{width:320px;height:320px;background:rgba(251,191,36,0.09);  top:40%;left:68%;animation-delay:-9s;}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(15px,-15px) scale(1.04)}}
+
+/* ================================================================
+   PAGE WRAPPER
+================================================================ */
+.page-wrapper{
+  position:relative;z-index:1;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:52px 20px;
+}
+
+/* ================================================================
+   HEADER
+================================================================ */
+.header-area{text-align:center;margin-bottom:40px;animation:fadeDown 0.8s ease both;}
+
+.badge-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(37,99,235,0.07);
+  border:1px solid rgba(37,99,235,0.18);
+  border-radius:50px;padding:7px 20px;margin-bottom:18px;
+  backdrop-filter:blur(8px);
+}
+.badge-pill span{font-size:11px;font-weight:700;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--blue-mid);}
+.dot-anim{width:7px;height:7px;border-radius:50%;background:var(--cyan);
+  animation:dotPulse 2s infinite;}
+.dot-gold{background:var(--gold-light);}
+@keyframes dotPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.45);opacity:0.65}}
+
+.header-area h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(26px,5.5vw,44px);font-weight:900;line-height:1.15;
+  background:linear-gradient(135deg,var(--blue-deep),var(--blue-mid),var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:10px;
+}
+.header-area p{font-size:14px;color:var(--text-light);max-width:420px;margin:0 auto;line-height:1.6;}
+
+/* ================================================================
+   CARD
+================================================================ */
+.card{
+  background:rgba(255,255,255,0.84);
+  border:1px solid rgba(255,255,255,0.92);
+  border-radius:var(--radius);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  box-shadow:var(--shadow-card);
+  padding:44px 40px;
+  width:100%;max-width:520px;
+  position:relative;
+  animation:fadeUp 0.8s ease 0.15s both;
+}
+.card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--blue-deep),var(--blue-mid),var(--cyan),var(--gold-light));
+  border-radius:var(--radius) var(--radius) 0 0;
+}
+.corner-deco{position:absolute;width:38px;height:38px;border-style:solid;border-color:rgba(37,99,235,0.18);}
+.corner-deco.tl{top:12px;left:12px;border-width:2px 0 0 2px;border-radius:6px 0 0 0;}
+.corner-deco.br{bottom:12px;right:12px;border-width:0 2px 2px 0;border-radius:0 0 6px 0;}
+
+.card-icon{
+  width:56px;height:56px;border-radius:16px;
+  background:linear-gradient(135deg,var(--blue-mid),var(--cyan));
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;margin-bottom:20px;
+  box-shadow:0 8px 24px rgba(37,99,235,0.22);
+}
+.card-title{font-size:20px;font-weight:700;color:var(--text-dark);margin-bottom:6px;line-height:1.3;}
+.card-subtitle{font-size:13px;color:var(--text-light);margin-bottom:28px;line-height:1.6;}
+
+/* ================================================================
+   FORM
+================================================================ */
+.form-group{margin-bottom:20px;}
+.form-group label{
+  display:block;font-size:11px;font-weight:700;
+  letter-spacing:1.8px;text-transform:uppercase;color:var(--blue-mid);margin-bottom:8px;
+}
+.input-wrap{position:relative;}
+.input-wrap .i-icon{
+  position:absolute;left:16px;top:50%;transform:translateY(-50%);
+  font-size:17px;pointer-events:none;
+}
+.input-wrap input{
+  width:100%;
+  background:rgba(248,250,255,0.9);
+  border:1.5px solid var(--gray-soft);
+  border-radius:var(--radius-sm);
+  padding:15px 16px 15px 46px;
+  font-family:'Poppins',sans-serif;font-size:15px;color:var(--text-dark);
+  outline:none;transition:all 0.3s;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+.input-wrap input::placeholder{color:#94a3b8;}
+.input-wrap input:focus{
+  border-color:var(--blue-mid);background:#fff;
+  box-shadow:0 0 0 4px rgba(37,99,235,0.08),0 2px 8px rgba(0,0,0,0.04);
+}
+.input-wrap input.err{border-color:#ef4444;box-shadow:0 0 0 4px rgba(239,68,68,0.08);}
+
+/* ================================================================
+   BUTTONS
+================================================================ */
+.btn-primary{
+  width:100%;padding:17px;
+  background:linear-gradient(135deg,var(--blue-mid),var(--blue-deep));
+  border:none;border-radius:var(--radius-sm);
+  font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;color:#fff;
+  cursor:pointer;position:relative;overflow:hidden;
+  transition:transform 0.2s,box-shadow 0.3s;
+  box-shadow:var(--shadow-btn);
+}
+.btn-primary::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.15),transparent);
+  opacity:0;transition:opacity 0.3s;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(37,99,235,0.4);}
+.btn-primary:hover::before{opacity:1;}
+.btn-primary:active{transform:translateY(0);}
+.btn-primary:disabled{opacity:0.55;cursor:not-allowed;transform:none;}
+
+.btn-ghost{
+  width:100%;padding:14px;background:transparent;
+  border:1.5px solid var(--gray-soft);border-radius:var(--radius-sm);
+  font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;
+  color:var(--text-mid);cursor:pointer;transition:all 0.3s;margin-top:10px;
+}
+.btn-ghost:hover{border-color:var(--blue-light);color:var(--blue-mid);background:rgba(59,130,246,0.05);}
+
+.btn-download{
+  width:100%;padding:17px;
+  background:linear-gradient(135deg,#d97706,#b45309);
+  border:none;border-radius:var(--radius-sm);
+  font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;color:#fff;
+  cursor:pointer;transition:all 0.3s;margin-top:16px;
+  box-shadow:0 8px 32px rgba(217,119,6,0.28);
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.btn-download:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(217,119,6,0.4);}
+.btn-download:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
+
+/* ================================================================
+   OTP
+================================================================ */
+.otp-group{display:flex;gap:9px;justify-content:center;margin:16px 0 20px;}
+.otp-group input{
+  width:50px;height:58px;
+  text-align:center;font-size:22px;font-weight:700;font-family:'Poppins',sans-serif;
+  background:rgba(248,250,255,0.9);
+  border:1.5px solid var(--gray-soft);border-radius:12px;color:var(--blue-deep);
+  transition:all 0.2s;outline:none;box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+.otp-group input:focus{border-color:var(--blue-mid);box-shadow:0 0 0 4px rgba(37,99,235,0.1);background:#fff;}
+.otp-group input.filled{border-color:var(--cyan);background:rgba(6,182,212,0.06);}
+
+/* ================================================================
+   ALERTS
+================================================================ */
+.alert{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:13px 16px;border-radius:12px;
+  font-size:13px;line-height:1.5;font-weight:500;margin-bottom:16px;
+  animation:fadeUp 0.3s ease;
+}
+.alert-error  {background:rgba(239,68,68,0.07); border:1px solid rgba(239,68,68,0.18); color:#dc2626;}
+.alert-success{background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.18);color:#059669;}
+.alert-info   {background:rgba(37,99,235,0.07); border:1px solid rgba(37,99,235,0.15); color:var(--blue-mid);}
+.alert .ai{font-size:16px;flex-shrink:0;margin-top:1px;}
+
+/* ================================================================
+   LOADING
+================================================================ */
+.loading-wrap{display:flex;flex-direction:column;align-items:center;gap:18px;padding:24px 0;}
+.spin-ring{
+  width:52px;height:52px;border-radius:50%;
+  border:3px solid rgba(37,99,235,0.12);border-top-color:var(--blue-mid);
+  animation:spin 0.75s linear infinite;
+}
+.loading-lbl{font-size:13px;color:var(--text-light);font-weight:500;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ================================================================
+   STEPS
+================================================================ */
+.steps{display:flex;align-items:center;margin-bottom:32px;}
+.step{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;position:relative;}
+.step:not(:last-child)::after{
+  content:'';position:absolute;top:17px;left:58%;right:-42%;
+  height:2px;background:var(--gray-soft);border-radius:2px;transition:background 0.5s;
+}
+.step.done:not(:last-child)::after{background:linear-gradient(90deg,var(--blue-mid),var(--cyan));}
+.step-c{
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;
+  background:var(--gray-soft);color:#94a3b8;
+  border:2px solid transparent;transition:all 0.4s;
+}
+.step.active .step-c{
+  background:linear-gradient(135deg,var(--blue-mid),var(--cyan));color:#fff;
+  box-shadow:0 4px 16px rgba(37,99,235,0.32);
+}
+.step.done .step-c{background:linear-gradient(135deg,var(--cyan),var(--blue-mid));color:#fff;}
+.step-l{font-size:10px;font-weight:600;color:#94a3b8;text-align:center;}
+.step.active .step-l{color:var(--blue-mid);}
+.step.done  .step-l{color:var(--cyan);}
+
+/* ================================================================
+   VIEWS
+================================================================ */
+.view{display:none;}
+.view.active{display:block;animation:fadeUp 0.4s ease both;}
+
+/* ================================================================
+   SUCCESS ICON
+================================================================ */
+.success-icon{
+  width:76px;height:76px;border-radius:50%;
+  background:linear-gradient(135deg,#10b981,#059669);
+  display:flex;align-items:center;justify-content:center;
+  font-size:32px;margin:0 auto 20px;
+  box-shadow:0 8px 32px rgba(16,185,129,0.32);
+  animation:popIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275) both;
+}
+@keyframes popIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+
+/* ================================================================
+   INFO STRIP
+================================================================ */
+.info-strip{
+  display:flex;align-items:flex-start;gap:12px;
+  background:linear-gradient(135deg,rgba(37,99,235,0.05),rgba(6,182,212,0.05));
+  border:1px solid rgba(37,99,235,0.12);
+  border-radius:12px;padding:14px 16px;margin-bottom:22px;
+}
+.info-strip .isi{font-size:12px;flex-shrink:0;line-height:1;}
+.info-strip p{font-size:12.5px;color:var(--text-mid);line-height:1.6;}
+.info-strip p strong{color:var(--blue-mid);font-weight:600;}
+
+/* ================================================================
+   ANIMATIONS
+================================================================ */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp  {from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)}}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-8px)}40%{transform:translateX(8px)}
+  60%{transform:translateX(-6px)}80%{transform:translateX(6px)}
+}
+
+/* ================================================================
+   OFF-SCREEN CERTIFICATE
+================================================================ */
+#cert-container{
+  position:fixed;left:-9999px;top:0;
+  width:1190px;height:842px;
+  z-index:-999;pointer-events:none;
+}
+
+/* ================================================================
+   FOOTER
+================================================================ */
+.page-footer{margin-top:28px;font-size:11px;color:#94a3b8;letter-spacing:0.5px;text-align:center;}
+
+/* ================================================================
+   RESPONSIVE
+================================================================ */
+@media(max-width:560px){
+  .card{padding:36px 22px;}
+  .otp-group input{width:42px;height:50px;font-size:18px;}
+  .card-title{font-size:18px;}
+  .header-area h1{font-size:clamp(22px,7vw,32px);}
+}
+</style>
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg-layer"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<div class="page-wrapper">
+
+  <!-- ─── HEADER ─── -->
+  <div class="header-area">
+    <div class="badge-pill">
+      <div class="dot-anim"></div>
+      <span>Bakti Sosial Era Digital</span>
+      <div class="dot-anim dot-gold"></div>
+    </div>
+    <h1>Portal Sertifikat<br>Kegiatan Bakti Masyarakat</h1>
+    <p>Ambil sertifikat keikutsertaan Anda dengan mudah, aman, dan instan.</p>
+  </div>
+
+  <!-- ─── CARD ─── -->
+  <div class="card">
+    <div class="corner-deco tl"></div>
+    <div class="corner-deco br"></div>
+
+    <!-- Steps -->
+    <div class="steps" id="step-indicator">
+      <div class="step active" id="s1"><div class="step-c">1</div><div class="step-l">Data Diri</div></div>
+      <div class="step" id="s2"><div class="step-c">2</div><div class="step-l">Verifikasi</div></div>
+      <div class="step" id="s3"><div class="step-c">3</div><div class="step-l">Unduh</div></div>
+    </div>
+
+    <!-- VIEW 1: Nama -->
+    <div class="view active" id="view-nama">
+      <div class="card-icon">🎓</div>
+      <div class="card-title">Masukkan Nama Lengkap</div>
+      <p class="card-subtitle">Nama Anda akan tercetak secara otomatis pada sertifikat resmi keikutsertaan.</p>
+
+      <div class="info-strip">
+        <span class="isi">📲</span>
+        <p>Kode verifikasi 6 digit akan dikirim ke <strong>Panitia</strong>. Minta kode tersebut kepada admin untuk melanjutkan.</p>
+      </div>
+
+      <div class="form-group">
+        <label>Nama Lengkap Peserta</label>
+        <div class="input-wrap">
+          <span class="i-icon">👤</span>
+          <input type="text" id="input-nama" placeholder="Contoh: Melqy Ertawanny" autocomplete="off"/>
+        </div>
+      </div>
+      <div id="alert-nama"></div>
+      <button class="btn-primary" id="btn-ambil" onclick="handleAmbil()">
+        ✦ &nbsp; Ambil Sertifikat Saya
+      </button>
+    </div>
+
+    <!-- VIEW 2: Loading -->
+    <div class="view" id="view-loading">
+      <div class="loading-wrap">
+        <div class="spin-ring"></div>
+        <div class="loading-lbl" id="loading-text">Mengirim kode verifikasi ke panitia…</div>
+      </div>
+    </div>
+
+    <!-- VIEW 3: OTP -->
+    <div class="view" id="view-otp">
+      <div class="card-icon">🔐</div>
+      <div class="card-title">Masukkan Kode Verifikasi</div>
+      <p class="card-subtitle">Kode 6 digit telah dikirimkan ke Panitia. Minta kode tersebut lalu ketikkan di bawah ini.</p>
+      <div id="alert-otp"></div>
+      <div class="otp-group" id="otp-group">
+        <input type="text" maxlength="1" class="otp-input" inputmode="numeric"/>
+        <input type="text" maxlength="1" class="otp-input" inputmode="numeric"/>
+        <input type="text" maxlength="1" class="otp-input" inputmode="numeric"/>
+        <input type="text" maxlength="1" class="otp-input" inputmode="numeric"/>
+        <input type="text" maxlength="1" class="otp-input" inputmode="numeric"/>
+        <input type="text" maxlength="1" class="otp-input" inputmode="numeric"/>
+      </div>
+      <button class="btn-primary" onclick="handleVerify()">🔓 &nbsp; Verifikasi &amp; Lanjutkan</button>
+      <button class="btn-ghost" onclick="resetToNama()">← Kembali ke Input Nama</button>
+    </div>
+
+    <!-- VIEW 4: Sukses -->
+    <div class="view" id="view-sukses">
+      <div class="success-icon">✓</div>
+      <div class="card-title" style="text-align:center">Verifikasi Berhasil! 🎉</div>
+      <p class="card-subtitle" style="text-align:center;margin-bottom:20px">
+        Sertifikat atas nama <strong id="nama-konfirmasi" style="color:var(--blue-deep)"></strong> telah siap diunduh.
+      </p>
+      <div class="alert alert-success">
+        <span class="ai">🏅</span>
+        <span>Selamat! Anda telah berhasil memverifikasi keikutsertaan dalam Kegiatan Bakti Sosial Era Digital.</span>
+      </div>
+      <button class="btn-download" id="btn-download" onclick="downloadSertifikat()">
+        <span>⬇</span> Unduh Sertifikat PDF
+      </button>
+      <button class="btn-ghost" onclick="resetAll()">Peserta Lain</button>
+    </div>
+
+  </div><!-- .card -->
+
+  <div class="page-footer">© 2025 · Panitia Bakti Sosial · Penyelenggara: MELQY ERTAWANNY</div>
+
+</div><!-- .page-wrapper -->
+
+
+<!-- ================================================================
+     OFF-SCREEN CERTIFICATE
+================================================================ -->
+<div id="cert-container">
+<div id="sertifikat" style="
+  width:1190px;height:842px;
+  position:relative;overflow:hidden;
+  background:#ffffff;
+  font-family:'Poppins',sans-serif;
+">
+
+  <!-- BG gradient -->
+  <div style="position:absolute;inset:0;
+    background:linear-gradient(155deg,#f0f9ff 0%,#ffffff 38%,#fff7ed 100%);"></div>
+
+  <!-- Dot pattern -->
+  <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.38" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="dp" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+        <circle cx="2" cy="2" r="1.1" fill="#2563eb" opacity="0.22"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#dp)"/>
+  </svg>
+
+  <!-- Top ribbon -->
+  <div style="position:absolute;top:0;left:0;right:0;height:12px;
+    background:linear-gradient(90deg,#1a4fa0,#2563eb,#06b6d4,#fbbf24,#06b6d4,#2563eb,#1a4fa0);"></div>
+
+  <!-- Bottom ribbon -->
+  <div style="position:absolute;bottom:0;left:0;right:0;height:8px;
+    background:linear-gradient(90deg,#1a4fa0,#2563eb,#06b6d4,#fbbf24,#06b6d4,#2563eb,#1a4fa0);"></div>
+
+  <!-- Outer border -->
+  <div style="position:absolute;top:22px;left:22px;right:22px;bottom:22px;
+    border:2px solid rgba(37,99,235,0.17);border-radius:6px;"></div>
+
+  <!-- Inner border -->
+  <div style="position:absolute;top:30px;left:30px;right:30px;bottom:30px;
+    border:1px solid rgba(37,99,235,0.09);border-radius:3px;"></div>
+
+  <!-- Corner ornaments (SVG) -->
+  <svg style="position:absolute;top:14px;left:14px" width="74" height="74" viewBox="0 0 74 74">
+    <path d="M12,62 L12,12 L62,12" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="5.5" fill="#2563eb"/><circle cx="12" cy="12" r="3" fill="#06b6d4"/>
+    <line x1="12" y1="26" x2="12" y2="38" stroke="#06b6d4" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="26" y1="12" x2="38" y2="12" stroke="#06b6d4" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  <svg style="position:absolute;top:14px;right:14px;transform:scaleX(-1)" width="74" height="74" viewBox="0 0 74 74">
+    <path d="M12,62 L12,12 L62,12" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="5.5" fill="#2563eb"/><circle cx="12" cy="12" r="3" fill="#06b6d4"/>
+    <line x1="12" y1="26" x2="12" y2="38" stroke="#06b6d4" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="26" y1="12" x2="38" y2="12" stroke="#06b6d4" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  <svg style="position:absolute;bottom:14px;left:14px;transform:scaleY(-1)" width="74" height="74" viewBox="0 0 74 74">
+    <path d="M12,62 L12,12 L62,12" fill="none" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="5.5" fill="#fbbf24"/>
+  </svg>
+  <svg style="position:absolute;bottom:14px;right:14px;transform:scale(-1,-1)" width="74" height="74" viewBox="0 0 74 74">
+    <path d="M12,62 L12,12 L62,12" fill="none" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="5.5" fill="#fbbf24"/>
+  </svg>
+
+  <!-- Side accent bars -->
+  <div style="position:absolute;left:44px;top:84px;bottom:84px;width:5px;border-radius:3px;
+    background:linear-gradient(180deg,transparent,#2563eb 30%,#06b6d4 50%,#2563eb 70%,transparent);opacity:0.45;"></div>
+  <div style="position:absolute;right:44px;top:84px;bottom:84px;width:5px;border-radius:3px;
+    background:linear-gradient(180deg,transparent,#fbbf24 30%,#d97706 50%,#fbbf24 70%,transparent);opacity:0.45;"></div>
+
+  <!-- ─── CONTENT ─── -->
+  <div style="
+    position:absolute;left:82px;right:82px;top:28px;bottom:28px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+  ">
+
+    <!-- Official badge -->
+    <div style="
+      display:inline-flex;align-items:center;gap:8px;
+      background:linear-gradient(135deg,rgba(37,99,235,0.07),rgba(6,182,212,0.07));
+      border:1px solid rgba(37,99,235,0.18);border-radius:50px;
+      padding:5px 20px;margin-bottom:14px;
+    ">
+      <span style="width:6px;height:6px;border-radius:50%;background:#06b6d4;display:inline-block;"></span>
+      <span style="font-family:'Poppins',sans-serif;font-size:9px;font-weight:800;
+        letter-spacing:3.5px;text-transform:uppercase;color:#2563eb;">Official Certificate</span>
+      <span style="width:6px;height:6px;border-radius:50%;background:#fbbf24;display:inline-block;"></span>
+    </div>
+
+    <!-- Logo Tunas Kelapa -->
+    <svg width="72" height="72" viewBox="0 0 120 120" style="margin-bottom:10px">
+      <circle cx="60" cy="60" r="56" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+      <circle cx="60" cy="60" r="49" fill="none" stroke="#2563eb" stroke-width="1" stroke-dasharray="5 5" opacity="0.45"/>
+      <circle cx="60" cy="60" r="42" fill="rgba(37,99,235,0.04)"/>
+      <path d="M60 102 Q57 84 58 66 Q59 50 60 38" stroke="#1a4fa0" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M60 44 Q44 28 28 33 Q42 40 56 52" fill="#2563eb" opacity="0.85"/>
+      <path d="M60 44 Q76 28 92 33 Q78 40 64 52" fill="#2563eb" opacity="0.85"/>
+      <path d="M60 44 Q43 35 35 20 Q49 34 59 48" fill="#06b6d4" opacity="0.78"/>
+      <path d="M60 44 Q77 35 85 20 Q71 34 61 48" fill="#06b6d4" opacity="0.78"/>
+      <path d="M60 44 Q54 27 52 12 Q58 30 60 48" fill="#1a4fa0" opacity="0.88"/>
+      <polygon points="60,11 62,18 70,18 64,23 66,30 60,25 54,30 56,23 50,18 58,18" fill="#fbbf24"/>
+      <path d="M54 102 Q57 93 60 89 Q63 93 66 102 Z" fill="#fbbf24"/>
+    </svg>
+
+    <!-- Org name -->
+    <div style="font-family:'Poppins',sans-serif;font-size:9.5px;font-weight:700;
+      letter-spacing:3.5px;text-transform:uppercase;color:#64748b;margin-bottom:16px;">
+      PANITIA BAKTI SOSIAL
+    </div>
+
+    <!-- Title -->
+    <div style="font-family:'Poppins',sans-serif;font-size:11px;font-weight:800;
+      letter-spacing:5px;text-transform:uppercase;color:#1a4fa0;margin-bottom:4px;">
+      SERTIFIKAT KEIKUTSERTAAN
+    </div>
+
+    <!-- Subtitle -->
+    <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;
+      color:#64748b;margin-bottom:15px;">
+      Kegiatan Bakti Sosial
+    </div>
+
+    <!-- Ornament divider -->
+    <svg width="400" height="20" viewBox="0 0 400 20" style="margin-bottom:14px">
+      <line x1="0" y1="10" x2="148" y2="10" stroke="#2563eb" stroke-width="1" opacity="0.28"/>
+      <polygon points="156,10 165,5 174,10 165,15" fill="#2563eb" opacity="0.55"/>
+      <polygon points="170,10 180,5 190,10 180,15" fill="#06b6d4"/>
+      <polygon points="186,10 196,5 206,10 196,15" fill="#fbbf24"/>
+      <polygon points="202,10 212,5 222,10 212,15" fill="#06b6d4"/>
+      <polygon points="218,10 228,5 238,10 228,15" fill="#2563eb" opacity="0.55"/>
+      <line x1="246" y1="10" x2="400" y2="10" stroke="#2563eb" stroke-width="1" opacity="0.28"/>
+    </svg>
+
+    <!-- Diberikan kepada -->
+    <div style="font-family:'Poppins',sans-serif;font-size:9.5px;font-weight:600;
+      letter-spacing:2.5px;text-transform:uppercase;color:#94a3b8;margin-bottom:6px;">
+      Diberikan Kepada
+    </div>
+
+    <!-- Nama -->
+    <div id="cert-nama" style="
+      font-family:'Playfair Display',serif;
+      font-size:43px;font-weight:900;
+      color:#1a4fa0;
+      text-align:center;line-height:1.15;margin-bottom:5px;
+    ">Nama Peserta</div>
+
+    <!-- Underline nama -->
+    <div style="width:310px;height:2.5px;border-radius:2px;margin-bottom:14px;
+      background:linear-gradient(90deg,transparent,#2563eb,#06b6d4,#fbbf24,#06b6d4,#2563eb,transparent);"></div>
+
+    <!-- Keterangan -->
+    <div style="font-family:'Cormorant Garamond',serif;font-size:13.5px;font-style:italic;
+      color:#475569;text-align:center;line-height:1.85;margin-bottom:11px;max-width:570px;">
+      Telah berpartisipasi aktif dan menyelesaikan seluruh rangkaian kegiatan dalam acara:
+    </div>
+
+    <!-- Nama kegiatan -->
+    <div style="
+      font-family:'Playfair Display',serif;font-size:15px;font-weight:700;
+      color:#1a4fa0;text-align:center;line-height:1.55;
+      padding:11px 32px;border-radius:10px;margin-bottom:22px;
+      background:linear-gradient(135deg,rgba(37,99,235,0.05),rgba(6,182,212,0.05));
+      border:1px solid rgba(37,99,235,0.15);
+    ">
+      "Fokus pada Kreativitas dan Tanggung Jawab di Era Digital"
+    </div>
+
+    <!-- Bottom row: tanggal | no sert | ttd -->
+    <div style="display:flex;width:100%;justify-content:space-between;align-items:flex-end;">
+
+      <!-- Tanggal -->
+      <div style="text-align:left;min-width:170px;">
+        <div style="font-family:'Poppins',sans-serif;font-size:8px;font-weight:700;
+          letter-spacing:2px;text-transform:uppercase;color:#94a3b8;margin-bottom:4px;">
+          Tanggal Pelaksanaan
+        </div>
+        <div id="cert-tanggal" style="font-family:'Cormorant Garamond',serif;
+          font-size:14px;font-style:italic;color:#334155;">— 2025 —</div>
+      </div>
+
+      <!-- No Sertifikat -->
+      <div style="text-align:center;">
+        <div style="font-family:'Poppins',sans-serif;font-size:8px;font-weight:700;
+          letter-spacing:2px;text-transform:uppercase;color:#94a3b8;margin-bottom:4px;">
+          No. Sertifikat
+        </div>
+        <div id="cert-no" style="font-family:'Poppins',sans-serif;font-size:11px;
+          font-weight:700;color:#2563eb;letter-spacing:1.5px;">—</div>
+      </div>
+
+      <!-- Tanda tangan -->
+      <div style="text-align:center;min-width:170px;">
+        <!--
+          src akan di-set ke base64 DataURL oleh JS (fungsi preloadTTD).
+          Ini memastikan html2canvas bisa render gambar tanpa CORS error
+          baik di desktop maupun Android mobile.
+        -->
+        <img id="cert-ttd"
+          alt="Tanda Tangan MELQY ERTAWANNY"
+          style="height:66px;max-width:165px;object-fit:contain;
+            display:block;margin:0 auto 3px;"/>
+        <div style="width:165px;height:1.5px;margin:4px auto 6px;
+          background:linear-gradient(90deg,transparent,#2563eb,#06b6d4,transparent);"></div>
+        <div style="font-family:'Poppins',sans-serif;font-size:9.5px;font-weight:800;
+          letter-spacing:1.5px;color:#1a4fa0;text-transform:uppercase;">
+          MELQY ERTAWANNY
+        </div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:11px;
+          font-style:italic;color:#64748b;margin-top:2px;">
+          Penyelenggara
+        </div>
+      </div>
+
+    </div><!-- bottom row -->
+  </div><!-- content -->
+
+  <!-- Watermark -->
+  <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
+    font-family:'Poppins',sans-serif;font-size:7.5px;letter-spacing:3.5px;
+    color:rgba(37,99,235,0.16);text-transform:uppercase;white-space:nowrap;">
+    SERTIFIKAT RESMI · BAKTI SOSIAL ERA DIGITAL · 2025
+  </div>
+
+</div><!-- #sertifikat -->
+</div><!-- #cert-container -->
+
+
+<!-- ================================================================
+     JAVASCRIPT
+================================================================ -->
+<script>
+'use strict';
+
+/* ─── STATE ─── */
+let _code     = '';   // OTP runtime — tidak di-render ke DOM
+let _nama     = '';
+let _verified = false;
+let _ttdB64   = '';   // base64 DataURL tanda tangan (di-preload)
+
+/* ─── CONFIG ─── */
+const TG_TOKEN   = '8309483032:AAEyb9s0rJ8wwBcy1abj8ptiO9O48iEaqGg';
+const TG_CHAT_ID = '8369352197';
+const TTD_URL    = 'https://files.catbox.moe/lma5a5.png';
+
+/* ================================================================
+   CORE FIX: Preload tanda tangan sebagai Base64 DataURL
+
+   Mengapa harus base64?
+   - html2canvas tidak bisa render <img> yang src-nya URL eksternal
+     secara langsung di Android WebView / browser ketat karena CORS.
+   - Jika src sudah berupa DataURL (base64), gambar dianggap "lokal"
+     sehingga pasti ter-render tanpa masalah CORS.
+
+   Proses:
+   1. fetch(TTD_URL) → blob
+   2. FileReader.readAsDataURL(blob) → base64 string
+   3. Simpan ke _ttdB64
+   4. Pasang ke <img id="cert-ttd">.src (untuk preview browser)
+   5. Saat download, inject ulang ke cloned document (onclone callback)
+================================================================ */
+async function preloadTTD() {
+  try {
+    const res = await fetch(TTD_URL, {
+      mode: 'cors',
+      cache: 'force-cache',  // cache agar tidak fetch ulang
+      headers: { 'Cache-Control': 'no-cache' }
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+
+    const blob = await res.blob();
+
+    // FileReader: blob → base64 DataURL
+    _ttdB64 = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);   // result = "data:image/png;base64,..."
+      reader.onerror   = () => reject(new Error('FileReader gagal'));
+      reader.readAsDataURL(blob);
+    });
+
+    // Inject ke preview img di sertifikat (agar tampil di browser)
+    document.getElementById('cert-ttd').src = _ttdB64;
+    console.log('[TTD] Preload berhasil, ukuran base64:', _ttdB64.length, 'chars');
+
+  } catch (err) {
+    console.warn('[TTD] Preload gagal:', err.message);
+    // Fallback: coba pasang langsung dengan crossOrigin
+    const img = document.getElementById('cert-ttd');
+    img.crossOrigin = 'anonymous';
+    img.src = TTD_URL + '?cb=' + Date.now();
+    _ttdB64 = ''; // tandai bahwa base64 belum tersedia
+  }
+}
+
+/* ─── Util: tunggu image loaded ─── */
+function waitImg(el) {
+  return new Promise(resolve => {
+    if (el.complete && el.naturalWidth > 0) { resolve(true); return; }
+    el.onload  = () => resolve(true);
+    el.onerror = () => resolve(false);
+  });
+}
+
+/* ─── Util: generate OTP 6 digit ─── */
+function genCode() { return String(Math.floor(100000 + Math.random() * 900000)); }
+
+/* ─── Util: tanggal Indonesia ─── */
+function tanggalIndo() {
+  const H=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+  const B=['Januari','Februari','Maret','April','Mei','Juni',
+           'Juli','Agustus','September','Oktober','November','Desember'];
+  const d=new Date();
+  return `${H[d.getDay()]}, ${d.getDate()} ${B[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+/* ─── Util: show/hide view ─── */
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+/* ─── Util: update steps ─── */
+function setStep(n) {
+  ['s1','s2','s3'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    el.classList.remove('active','done');
+    if(i+1<n)  el.classList.add('done');
+    if(i+1===n) el.classList.add('active');
+  });
+}
+
+/* ─── Util: show alert ─── */
+function showAlert(cid, type, icon, msg) {
+  document.getElementById(cid).innerHTML =
+    `<div class="alert alert-${type}"><span class="ai">${icon}</span><span>${msg}</span></div>`;
+}
+
+/* ─── OTP input behaviour ─── */
+function initOtp() {
+  const inputs = document.querySelectorAll('.otp-input');
+  inputs.forEach((inp, idx) => {
+    inp.addEventListener('input', e => {
+      const v = e.target.value.replace(/\D/g,'');
+      e.target.value = v;
+      if(v){ inp.classList.add('filled'); if(idx<inputs.length-1) inputs[idx+1].focus(); }
+      else  { inp.classList.remove('filled'); }
+    });
+    inp.addEventListener('keydown', e => {
+      if(e.key==='Backspace'&&!inp.value&&idx>0) inputs[idx-1].focus();
+    });
+    inp.addEventListener('paste', e => {
+      e.preventDefault();
+      const p=(e.clipboardData||window.clipboardData).getData('text').replace(/\D/g,'').slice(0,6);
+      p.split('').forEach((c,i)=>{ if(inputs[i]){ inputs[i].value=c; inputs[i].classList.add('filled'); } });
+      inputs[Math.min(p.length,5)].focus();
+    });
+  });
+}
+function getOtp(){ return Array.from(document.querySelectorAll('.otp-input')).map(i=>i.value).join(''); }
+function clearOtp(){ document.querySelectorAll('.otp-input').forEach(i=>{i.value='';i.classList.remove('filled');}); }
+
+/* ─── Handler: Ambil Sertifikat ─── */
+async function handleAmbil() {
+  const nama = document.getElementById('input-nama').value.trim();
+  const inp  = document.getElementById('input-nama');
+  if(!nama){
+    inp.classList.add('err'); inp.focus();
+    setTimeout(()=>inp.classList.remove('err'),2500);
+    showAlert('alert-nama','error','⚠️','Mohon masukkan nama lengkap Anda terlebih dahulu.');
+    return;
+  }
+  document.getElementById('alert-nama').innerHTML='';
+  _nama = nama;
+  _code = genCode(); // OTP dibuat di runtime, tidak di-render ke HTML
+
+  showView('view-loading'); setStep(2);
+  document.getElementById('loading-text').textContent='Mengirim kode verifikasi ke admin…';
+
+  const pesan =
+    `📋 *Permintaan Sertifikat Baru*\n\n`+
+    `👤 *Nama:* ${_nama}\n`+
+    `🔑 *Kode Verifikasi:* \`${_code}\`\n\n`+
+    `_Sampaikan kode ini kepada peserta._`;
+
+  try {
+    const res  = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({chat_id:TG_CHAT_ID,text:pesan,parse_mode:'Markdown'})
+    });
+    const data = await res.json();
+    if(!data.ok) throw new Error(data.description||'Telegram API error');
+    showView('view-otp');
+    document.getElementById('alert-otp').innerHTML='';
+    clearOtp();
+    document.querySelector('.otp-input').focus();
+  } catch(err){
+    setStep(1); showView('view-nama');
+    showAlert('alert-nama','error','⚠️',`Gagal mengirim kode: ${err.message}. Periksa koneksi internet.`);
+  }
+}
+
+/* ─── Handler: Verifikasi OTP ─── */
+function handleVerify() {
+  const val = getOtp();
+  if(val.length<6){ showAlert('alert-otp','error','⚠️','Masukkan 6 digit kode verifikasi.'); return; }
+  if(val===_code){
+    _verified=true; setStep(3);
+    document.getElementById('nama-konfirmasi').textContent=_nama;
+    showView('view-sukses');
+  } else {
+    showAlert('alert-otp','error','❌','Kode verifikasi salah. Silakan coba lagi.');
+    const g=document.getElementById('otp-group');
+    g.style.animation='none'; void g.offsetHeight; g.style.animation='shake 0.45s ease';
+  }
+}
+
+/* ================================================================
+   Handler: Download Sertifikat
+
+   PERBAIKAN TANDA TANGAN:
+   1. _ttdB64 sudah di-preload saat halaman load.
+   2. Sebelum html2canvas, inject base64 ke <img> (bukan URL eksternal).
+   3. onclone() callback: inject ulang ke cloned DOM (kritis untuk html2canvas).
+   4. waitImg() memastikan gambar sudah selesai di-decode sebelum render.
+   5. Delay kecil (150ms) untuk flush browser render pipeline.
+================================================================ */
+async function downloadSertifikat() {
+  if(!_verified) return;
+
+  const btn = document.getElementById('btn-download');
+  btn.disabled=true;
+  btn.innerHTML=`<div style="width:20px;height:20px;border:2.5px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.75s linear infinite;flex-shrink:0"></div>&nbsp; Membuat PDF…`;
+
+  /* 1. Isi data sertifikat */
+  document.getElementById('cert-nama').textContent    = _nama;
+  document.getElementById('cert-tanggal').textContent = tanggalIndo();
+  document.getElementById('cert-no').textContent      = 'BS-ERA-'+Date.now().toString().slice(-6);
+
+  /* 2. Pastikan tanda tangan base64 sudah siap */
+  const ttdImg = document.getElementById('cert-ttd');
+
+  if (_ttdB64) {
+    // CARA UTAMA: inject base64 DataURL (100% berhasil di semua browser)
+    ttdImg.src = _ttdB64;
+  } else {
+    // Preload awal gagal → fetch ulang sekarang
+    console.warn('[TTD] Mencoba fetch ulang tanda tangan…');
+    try {
+      const res  = await fetch(TTD_URL, { mode:'cors' });
+      const blob = await res.blob();
+      _ttdB64 = await new Promise((rs,rj)=>{
+        const fr=new FileReader();
+        fr.onloadend=()=>rs(fr.result);
+        fr.onerror=()=>rj(new Error('FileReader error'));
+        fr.readAsDataURL(blob);
+      });
+      ttdImg.src = _ttdB64;
+    } catch(e) {
+      console.warn('[TTD] Fetch ulang gagal:', e.message);
+      // Fallback terakhir: pasang langsung + crossOrigin (mungkin berhasil di desktop)
+      ttdImg.crossOrigin='anonymous';
+      ttdImg.src=TTD_URL+'?nocache='+Date.now();
+    }
+  }
+
+  /* 3. Tunggu fonts + image selesai load */
+  await document.fonts.ready;
+  await waitImg(ttdImg);
+
+  /* 4. Flush render (penting untuk Android mobile) */
+  await new Promise(r=>setTimeout(r,180));
+
+  /* 5. Render canvas */
+  try {
+    const certEl = document.getElementById('sertifikat');
+
+    const canvas = await html2canvas(certEl, {
+      scale          : 3,            // skala 3× untuk kualitas HD
+      useCORS        : true,         // aktifkan CORS (wajib)
+      allowTaint     : false,        // jangan biarkan canvas ter-taint
+      backgroundColor: '#ffffff',
+      logging        : false,
+      imageTimeout   : 25000,        // timeout 25 detik
+
+      /* onclone: dipanggil setelah html2canvas clone DOM.
+         Kita inject ulang base64 ke clone agar pasti ter-render. */
+      onclone(clonedDoc) {
+        const clImg = clonedDoc.getElementById('cert-ttd');
+        if(clImg && _ttdB64) {
+          clImg.src = _ttdB64;  // inject base64 ke cloned element
+        }
+      }
+    });
+
+    /* 6. Export ke PDF A4 Landscape */
+    const imgData = canvas.toDataURL('image/jpeg', 0.97);
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({
+      orientation : 'landscape',
+      unit        : 'mm',
+      format      : 'a4'           // 297 × 210 mm
+    });
+    pdf.addImage(imgData, 'JPEG', 0, 0, 297, 210);
+    pdf.save(`Sertifikat_${_nama.replace(/\s+/g,'_')}.pdf`);
+
+  } catch(err) {
+    console.error('[PDF]', err);
+    alert('Terjadi kesalahan saat membuat PDF.\n'+err.message+
+          '\n\nCoba refresh halaman dan ulangi.');
+  }
+
+  btn.disabled=false;
+  btn.innerHTML='<span>⬇</span> Unduh Sertifikat PDF';
+}
+
+/* ─── Reset ─── */
+function resetToNama(){ setStep(1); showView('view-nama'); }
+function resetAll(){
+  _code='';_nama='';_verified=false;
+  document.getElementById('input-nama').value='';
+  document.getElementById('alert-nama').innerHTML='';
+  clearOtp(); setStep(1); showView('view-nama');
+}
+
+/* ─── INIT ─── */
+document.addEventListener('DOMContentLoaded', ()=>{
+  initOtp();
+  document.getElementById('input-nama').addEventListener('keydown',e=>{
+    if(e.key==='Enter') handleAmbil();
+  });
+
+  /*
+    PRELOAD tanda tangan base64 saat halaman pertama kali dimuat.
+    Ini adalah kunci agar tanda tangan muncul di PDF:
+    - Di-fetch sekali → convert ke base64 → simpan di _ttdB64
+    - Saat download, tinggal inject _ttdB64 ke <img>.src
+  */
+  preloadTTD();
+});
+</script>
+
+</body>
+</html>
